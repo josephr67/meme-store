@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Memerator</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<nav>
+			<ul>
+            	<li><a href="/">Home</a></li>
+				<li><a href="/admin">Admin</a></li>
+			</ul>
+		</nav>
+		
+		<script type="text/javascript"> 
+			function insertRating(){
+				var ratee = document.getElementById("ratee").value;
+				var stars = document.getElementById("stars").value;
+				var comment = document.getElementById("comment").value;
+
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET","http://localhost:3000/getMeme?ratee=" + ratee + "&stars=" + stars + "&comment=" + comment, true);
+				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				xhr.send();
+   			}
+			
+			function getMeme(){
+				var xhr = new XMLHttpRequest();			
+				
+				xhr.open("GET","http://localhost:3000/getMeme", true);
+				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+				xhr.onreadystatechange = function() {
+        			if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+            			document.getElementById("ratings-div").innerHTML = this.responseText;
+       				}
+				};
+				
+				xhr.send();
+   			}
+			
+			function insertMeme(){
+				var xhr = new XMLHttpRequest();
+				var express = require('express')
+				var multer =  require('multer')
+				var upload = multer({ dest: 'uploads/getMeme' })
+
+				var app = express()
+				app.post('/getMeme', upload.single('meme'), function (req, res, next) {
+					})
+
+				app.post('/getMeme/Memerator', upload.array('meme', 12), function (req, res, next) {
+					})
+
+				var cpUpload = upload.fields([{ name: 'meme', maxCount: 1 }, { name: 'gallery', maxCount: 8 }])
+				app.post('/getMeme', cpUpload, function (req, res, next) {
+				})
+
+				xhr.open("GET","http://localhost:3000/getMeme", true);
+				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+				xhr.onreadystatechange = function() {
+        			if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+            			document.getElementById("ratings-div").innerHTML = this.responseText;
+       				}
+				};
+				
+				xhr.send();
+				   }
+		</script>
+
+		<h1>Memerator :)</h1>
+		
+		<form action="/profile" method="post" enctype="multipart/form-data">
+			<input type="file" name="avatar" />
+		  </form>
+		
+		
+
+		<button type="button" onclick="getMeme()">Send It!</button>
+
+		<div id="ratings-div">
+		</div>
+		
+		<footer>Go Patriots!</footer>
+	</body>
+</html>
