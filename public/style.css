@@ -2,6 +2,9 @@ body {
 	margin: 0px;
 	font-size: 1.1em;
 	text-align: center;
+	background-color: #67a6e4;
+
+	
 }
 
 
@@ -16,7 +19,7 @@ nav ul li {
 }
 
 a {
-	color: 	#0000ff;
+	color: 	#000000;
 	font-weight: bold;
 	text-align: center;
 }
@@ -24,7 +27,7 @@ a {
 h1 {
 	margin: 35px;
 	text-align: center;
-	color: 	#0000ff;
+	color: 	#000000;
 	
 }
 
